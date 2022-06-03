@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация пользователей</title>
+    <style>
+        td{
+            border: solid 1px silver;
+            text-align:center;
+            }
+    </style>
+    <div th:insert="~{fragments :: Bootstrap}"></div>
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <a class="navbar-brand" href="/">Hospital</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <form th:action="@{/hospital/login}" th:method="get">
+        <button type="submit" class="btn btn-primary">Войти</button>
+    </form>
+</nav>
+<div class="container mt-4 ml-3">
+    <div th:if="${message}">
+        <h2 th:text="${message}"></h2>
+    </div>
+    <h3>Для регистрации заполните форму...</h3>
+    <br>
+    <form th:method="POST" th:action="@{/hospital/registration}" th:object="${patient}">
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="firstName">Имя</label>
+                <input type="text" th:field="*{firstName}" class="form-control" id="firstName" placeholder="Введите имя...">
+                <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" style="color:red"></div>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="secondName">Фамилия</label>
+                <input type="text" th:field="*{secondName}" class="form-control" id="secondName" placeholder="Введите фамилию...">
+                <div th:if="${#fields.hasErrors('secondName')}" th:errors="*{secondName}" style="color:red"></div>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="insurance">Номер мед. страхования</label>
+                <input type="text" th:field="*{insurance}" class="form-control" id="insurance" placeholder="Заполните поле...">
+                <div th:if="${#fields.hasErrors('insurance')}" th:errors="*{insurance}" style="color:red"></div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="username">Логин</label>
+                <input type="text" th:field="*{username}" class="form-control" id="username" placeholder="Введите логин...">
+                <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color:red"></div>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="password">Пароль</label>
+                <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Введите пароль...">
+                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red"></div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group" col-md-5>
+                <label for="email">Email</label>
+                <input type="email" th:field="*{email}" class="form-control" id="email" placeholder="Ведите ваш email...">
+                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:red"></div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+
+
+<!--        <table>-->
+<!--            <thead>-->
+<!--            <td width="150">Имя</td>-->
+<!--            <td width="150px">Фамилия</td>-->
+<!--            <td width="150px">Страховка</td>-->
+<!--            <td width="150px">Логин</td>-->
+<!--            <td width="150px">Пароль</td>-->
+<!--            <td width="250px">Email</td>-->
+
+<!--            </thead>-->
+<!--            <tr>-->
+<!--                <td>-->
+<!--                    <input type="text" th:field="*{firstName}" size="20"/>-->
+<!--                    <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" style="color:red"></div>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                    <input type="text" th:field="*{secondName}" size="20"/>-->
+<!--                    <div th:if="${#fields.hasErrors('secondName')}" th:errors="*{secondName}" style="color:red"></div>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                    <input type="text" th:field="*{insurance}" size="20"/>-->
+<!--                    <div th:if="${#fields.hasErrors('insurance')}" th:errors="*{insurance}" style="color:red"></div>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                    <input type="text" th:field="*{username}" size="20"/>-->
+<!--                    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color:red"></div>-->
+
+<!--                </td>-->
+<!--                <td>-->
+<!--                    <input type="text" th:field="*{password}" size="20"/>-->
+<!--                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red"></div>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                    <input type="text" th:field="*{email}" size="30"/>-->
+<!--                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:red"></div>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--        <br>-->
+<!--        <input type="submit" value="Вперед!"/>-->
+    </form>
+</div>
+<div th:insert="~{fragments :: Optionals}"></div>
+</body>
+</html>
