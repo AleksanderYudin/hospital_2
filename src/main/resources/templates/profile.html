@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Профиль</title>
+    <div th:insert="~{fragments :: Bootstrap}"></div>
+
+</head>
+<body>
+<div th:insert="~{fragments :: Navbar}"></div>
+<div class="container mt-4 ml-3">
+    <form th:method="POST" th:action="@{/hospital/profile}">
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="firstName">Имя</label>
+                <input type="text" th:value="${firstName}" class="form-control" id="firstName" readonly>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="secondName">Фамилия</label>
+                <input type="text" th:value="${secondName}" class="form-control" id="secondName" readonly>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="email">Email</label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="Ведите новый email...">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="insurance">Номер мед.страхования</label>
+                <input type="text" name="insurance" class="form-control" id="insurance" placeholder="Введите новый номер...">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="password">Пароль</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Введите новый пароль...">
+                <small id="passwordHelpInline" class="text-muted">
+                    Не менее 4-х символов
+                </small>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    </form>
+</div>
+<div th:insert="~{fragments :: Optionals}"></div>
+</body>
+</html>

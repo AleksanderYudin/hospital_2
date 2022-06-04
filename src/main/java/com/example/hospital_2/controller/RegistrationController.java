@@ -34,12 +34,9 @@ public class RegistrationController {
                     "Пользователь с таким логином уже существует!");
             return "registration";
         }
-        else {
-            model.addAttribute("patient", new Patient());
-            model.addAttribute("message",
-                    "Пользователь успешно добавлен!");
+        else
             return "redirect:/hospital";
-        }
+
     }
 
     @GetMapping("/activate/{code}")
@@ -47,11 +44,11 @@ public class RegistrationController {
         boolean isActivated = patientService.activatePatient(code);
 
         if (isActivated) {
-            model.addAttribute("message", "User successfully activated");
+            model.addAttribute("message", "Почтоый адрес успешно подтверждён!");
         } else {
-            model.addAttribute("message", "Activation code is not found!");
+            model.addAttribute("message", "Почтовый адрес не подтверждён! Пожалуста, " +
+                    "проверьте почту и перейдите по ссылке в сообщении.");
         }
-
         return "login";
     }
 

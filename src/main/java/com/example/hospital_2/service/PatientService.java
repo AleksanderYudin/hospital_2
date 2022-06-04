@@ -40,6 +40,12 @@ public class PatientService implements UserDetailsService {
         patient.setActivationCode(UUID.randomUUID().toString());
         patientRepository.save(patient);
 
+        sendMessage(patient);
+
+        return true;
+    }
+
+    private void sendMessage(Patient patient) {
         if(!patient.getEmail().isEmpty()) {
             String message = String.format(
                     "Hello, %s! \n" +
@@ -49,8 +55,6 @@ public class PatientService implements UserDetailsService {
             );
             mailSender.send(patient.getEmail(), "Activation code", message);
         }
-
-        return true;
     }
 
     public boolean activatePatient(String code) {
@@ -60,5 +64,31 @@ public class PatientService implements UserDetailsService {
         patient.setActivationCode(null);
         patientRepository.save(patient);
         return true;
+    }
+
+    public void updateProfile(Patient patient, String email, String password,String insurance) {
+        String patientEmail = patient.getEmail();
+        String patientInsurance = patient.getInsurance();
+
+        boolean isEmailChanged = (email != null && !email.equals(patientEmail)) ||
+                (patientEmail != null && !patientEmail.equals(email));
+        if(isEmailChanged) {
+            patient.setEmail(email);
+            if(!email.isEmpty())
+                patient.setActivationCode(UUID.randomUUID().toString());
+        }
+
+        boolean isInsuranceChanged = (insurance != null && !insurance.equals(patientInsurance)) ||
+                (patientInsurance != null && !patientInsurance.equals(insurance));
+        if(isInsuranceChanged) {
+            patient.setEmail(email);
+
+            if (!password.isEmpty())
+                patient.setPassword(passwordEncoder.encode(patient.getPassword()));
+
+            patientRepository.save(patient);
+            if (isEmailChanged)
+                sendMessage(patient);
+        }
     }
 }
