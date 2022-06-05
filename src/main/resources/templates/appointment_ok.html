@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Профиль</title>
+    <div th:insert="~{fragments :: Bootstrap}"></div>
+
+</head>
+<body>
+<div th:insert="~{fragments :: Navbar}"></div>
+
+<div class="alert alert-success mt-4 ml-3" role="alert"
+     th:text="'Вы успешно записаны на приём! Ваш доктор: ' + ${doctor} + '. Дата и время приёма: ' + ${day} + ' в ' + ${time}">
+</div>
+
+<div th:insert="~{fragments :: Optionals}"></div>
+</body>
+</html>

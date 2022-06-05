@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title>Профиль</title>
+  <div th:insert="~{fragments :: Bootstrap}"></div>
+
+</head>
+<body>
+<div th:insert="~{fragments :: Navbar}"></div>
+
+<div class="container mt-4 ml-3">
+  <form>
+    <div th:each="day : ${days.keySet}">
+      <div class="form-row">
+        <label class="form-control-lg" th:text="*{day} + ':     '"></label>
+        <div th:each="time : *{days.get(day)}" class="form-group col-md-1">
+          <a th:text="*{time}" class="form-control form-control-lg"
+             th:href="@{/hospital/appointments/new(doctor=${doctor},day=*{day},time=*{time})}"></a>
+<!--          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#ModalCenter"-->
+<!--                  th:text="*{time}"></button>-->
+<!--          <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">-->
+<!--            <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--              <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                  <h5 class="modal-title" id="ModalCenterTitle">Запись на приём</h5>-->
+<!--                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                  </button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                  <p th:text="'Вы уверены, что хотите записаться на ' + *{day} + ' в ' + *{time} + '?'"></p>-->
+<!--                </div>-->
+<!--                <div class="modal-footer">-->
+<!--                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Нет</button>-->
+<!--                  <a th:text="Да" class="form-control col-md-1"-->
+<!--                     th:href="@{/hospital/appointments/new(doctor=${doctor},day=*{day},time=*{time})}"></a>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div th:insert="~{fragments :: Optionals}"></div>
+</body>
+</html>
