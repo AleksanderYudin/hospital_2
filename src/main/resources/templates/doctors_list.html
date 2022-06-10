@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title>Профиль</title>
+  <div th:insert="~{fragments :: Bootstrap}"></div>
+
+</head>
+<body>
+<div th:insert="~{fragments :: Navbar}"></div>
+
+<div class="container mt-4 ml-3">
+  <form>
+    <div th:each="doctor : ${doctorsList}">
+      <div class="form-row" >
+        <label class="form-control-lg" th:text="*{doctor.qualification} + ': '"></label>
+        <div class="form-group col-md-4">
+          <a th:text="*{doctor.name}" class="form-control form-control-lg"
+             th:href="@{/hospital/appointments/doctors/{id}(doctor=*{doctor.id})}"></a>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div th:insert="~{fragments :: Optionals}"></div>
+</body>
+</html>
