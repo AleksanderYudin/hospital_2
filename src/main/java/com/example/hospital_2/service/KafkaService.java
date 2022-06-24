@@ -56,4 +56,35 @@ public class KafkaService {
 
         return doctorsList;
     }
+
+    public DoctorDto getAppointments(Long id) {
+
+        CompletableFuture<String> completableFuture = new CompletableFuture<>();
+        String uuid = UUID.randomUUID().toString();
+        Hospital2Application.futureMap.put(uuid, completableFuture);
+
+        ListenableFuture<SendResult<String, String>> future = kafkaTemplate
+                .send("hospital2_to_hospital_doctorsList", uuid, id.toString());
+        future.addCallback(System.out::println, System.err::println);
+        kafkaTemplate.flush();
+
+        String result = null;
+        try {
+            result = completableFuture.get();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+
+        Hospital2Application.futureMap.remove(uuid);
+
+        DoctorDto doctorDto = null;
+        try {
+            doctorDto = objectMapper.readValue(result, DoctorDto.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return doctorDto;
+    }
 }

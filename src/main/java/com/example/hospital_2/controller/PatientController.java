@@ -60,21 +60,7 @@ public class PatientController {
 
     @GetMapping("appointments/doctors/{id}")
     public String getAppointments(@PathVariable Long id, Model model){
-        Map<String, List<String>> map = new HashMap<>();
-
-        List<String> list1 = new ArrayList<>();
-        list1.add("10:00");
-        list1.add("12:00");
-        list1.add("14:00");
-        List<String> list2 = new ArrayList<>();
-        list2.add("15:00");
-        list2.add("16:00");
-        map.put("Понедельник", list1);
-        map.put("Вторник", list2);
-        model.addAttribute("days", map);
-        model.addAttribute("doctor", "Айболит");
-
-        model.addAttribute("id", id);
+        model.addAttribute("doctorsList", kafkaService.getAppointments(id));
         return "appointments";
     }
 
