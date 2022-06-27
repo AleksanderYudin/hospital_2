@@ -60,19 +60,17 @@ public class PatientController {
 
     @GetMapping("appointments/doctors/{id}")
     public String getAppointments(@PathVariable Long id, Model model){
-        model.addAttribute("doctorsList", kafkaService.getAppointments(id));
+        model.addAttribute("appointments", kafkaService.getAppointments(id));
         return "appointments";
     }
 
     @GetMapping("appointments/new")
     public String createAppointment(@RequestParam String doctor,
-                                    @RequestParam String day,
-                                    @RequestParam String time,
+                                    @RequestParam String date,
                                     Model model){
 
         model.addAttribute("doctor", doctor);
-        model.addAttribute("day", day);
-        model.addAttribute("time", time);
+        model.addAttribute("date", date);
 
         return "appointment_ok";
     }

@@ -1,11 +1,14 @@
 package com.example.hospital_2.model;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -13,9 +16,10 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Jacksonized
 public class DoctorDto {
     private Long id;
     private String name;
     private String qualification;
-    private Map<String, List<String>> dates;
+    private List<LocalDateTime> dates;
 }

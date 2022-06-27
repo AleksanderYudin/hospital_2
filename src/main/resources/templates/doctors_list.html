@@ -15,7 +15,7 @@
         <label class="form-control-lg" th:text="*{doctor.qualification} + ': '"></label>
         <div class="form-group col-md-4">
           <a th:text="*{doctor.name}" class="form-control form-control-lg"
-             th:href="@{/hospital/appointments/doctors/{id}(doctor=*{doctor.id})}"></a>
+             th:href="@{/hospital/appointments/doctors/{id}(id=*{doctor.id})}"></a>
         </div>
       </div>
     </div>

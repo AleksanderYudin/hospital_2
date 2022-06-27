@@ -10,12 +10,11 @@
 
 <div class="container mt-4 ml-3">
   <form>
-    <div th:each="day : ${days.keySet}">
       <div class="form-row">
-        <label class="form-control-lg" th:text="*{day} + ':     '"></label>
-        <div th:each="time : *{days.get(day)}" class="form-group col-md-1">
-          <a th:text="*{time}" class="form-control form-control-lg"
-             th:href="@{/hospital/appointments/new(doctor=${doctor},day=*{day},time=*{time})}"></a>
+<!--        <label class="form-control-lg"  th:text="*{time}"></label>-->
+        <div th:each="date : ${doctor.getDates}" class="form-group col-md-1">
+          <a th:text="*{date}" class="form-control form-control-lg"
+             th:href="@{/hospital/appointments/new(doctor=${doctor.getId},date=8{date})}"></a>
 <!--          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#ModalCenter"-->
 <!--                  th:text="*{time}"></button>-->
 <!--          <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">-->
@@ -38,7 +37,8 @@
 <!--              </div>-->
 <!--            </div>-->
 <!--          </div>-->
-        </div>
+<!--          </div>-->
+<!--        </div>-->
       </div>
     </div>
   </form>
